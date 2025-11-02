@@ -1,0 +1,20 @@
+[2025-08-30 16:37:14] [INFO] Banking system started
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC1 for John Smith 1
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC2 for Jane Doe 2
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC3 for Bob Johnson 3
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC4 for Alice Brown 4
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC5 for Charlie Wilson 5
+[2025-08-30 16:37:14] [INFO] Generated 5 sample accounts
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC6 for John Doe
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC7 for Jane Smith
+[2025-08-30 16:37:14] [INFO] Account created: 0000ACC8 for Bob Johnson
+[2025-08-30 18:15:49] [INFO] Banking system started
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC1 for John Smith 1
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC2 for Jane Doe 2
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC3 for Bob Johnson 3
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC4 for Alice Brown 4
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC5 for Charlie Wilson 5
+[2025-08-30 18:15:49] [INFO] Generated 5 sample accounts
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC6 for John Doe
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC7 for Jane Smith
+[2025-08-30 18:15:49] [INFO] Account created: 0000ACC8 for Bob Johnson

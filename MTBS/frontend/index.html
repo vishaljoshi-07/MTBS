@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTBS - Multithreaded Bank Transaction System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1>MTBS Bank</h1>
+            </div>
+            <div class="header-controls">
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="system-status">
+                    <span class="status-indicator" id="status-indicator"></span>
+                    <span class="status-text" id="status-text">System Status</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#accounts" class="nav-item" data-section="accounts">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Accounts</span>
+                </a>
+                <a href="#transactions" class="nav-item" data-section="transactions">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#threads" class="nav-item" data-section="threads">
+                    <i class="fas fa-microchip"></i>
+                    <span>Thread Monitor</span>
+                </a>
+                <a href="#performance" class="nav-item" data-section="performance">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Performance</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Banking Dashboard</h2>
+                    <p>Real-time monitoring of the multithreaded banking system</p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-accounts">0</h3>
+                            <p>Total Accounts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-transactions">0</h3>
+                            <p>Total Transactions</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="active-threads">0</h3>
+                            <p>Active Threads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="queue-size">0</h3>
+                            <p>Queue Size</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="create-account-btn">
+                            <i class="fas fa-plus"></i> Create Account
+                        </button>
+                        <button class="btn btn-secondary" id="generate-data-btn">
+                            <i class="fas fa-database"></i> Generate Sample Data
+                        </button>
+                        <button class="btn btn-warning" id="clear-data-btn">
+                            <i class="fas fa-trash"></i> Clear All Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Activity Feed -->
+                <div class="activity-feed">
+                    <h3>Live Activity Feed</h3>
+                    <div class="feed-container" id="activity-feed">
+                        <div class="feed-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>System initialized. Ready for transactions.</span>
+                            <small class="timestamp">Just now</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accounts Section -->
+            <section id="accounts" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-credit-card"></i> Account Management</h2>
+                    <p>Create and manage bank accounts</p>
+                </div>
+
+                <!-- Create Account Form -->
+                <div class="form-card">
+                    <h3>Create New Account</h3>
+                    <form id="create-account-form">
+                        <div class="form-group">
+                            <label for="holder-name">Account Holder Name</label>
+                            <input type="text" id="holder-name" name="holderName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="initial-balance">Initial Balance ($)</label>
+                            <input type="number" id="initial-balance" name="initialBalance" min="0" step="0.01" value="0.00">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create Account
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Accounts List -->
+                <div class="accounts-list">
+                    <h3>Existing Accounts</h3>
+                    <div class="accounts-grid" id="accounts-grid">
+                        <!-- Accounts will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactions" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Transaction Processing</h2>
+                    <p>Perform banking transactions with real-time processing</p>
+                </div>
+
+                <!-- Transaction Forms -->
+                <div class="transaction-forms">
+                    <!-- Deposit Form -->
+                    <div class="form-card">
+                        <h3><i class="fas fa-arrow-down"></i> Deposit</h3>
+                        <form id="deposit-form">
+                            <div class="form-group">
+                                <label for="deposit-account">Account Number</label>
+                                <select id="deposit-account" name="accountNumber" required>
+                                    <option value="">Select Account</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="deposit-amount">Amount ($)</label>
+                                <input type="number" id="deposit-amount" name="amount" min="0.01" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="deposit-description">Description</label>
+                                <input type="text" id="deposit-description" name="description" placeholder="e.g., Salary deposit">
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-arrow-down"></i> Process Deposit
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Withdraw Form -->
+                    <div class="form-card">
+                        <h3><i class="fas fa-arrow-up"></i> Withdraw</h3>
+                        <form id="withdraw-form">
+                            <div class="form-group">
+                                <label for="withdraw-account">Account Number</label>
+                                <select id="withdraw-account" name="accountNumber" required>
+                                    <option value="">Select Account</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="withdraw-amount">Amount ($)</label>
+                                <input type="number" id="withdraw-amount" name="amount" min="0.01" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="withdraw-description">Description</label>
+                                <input type="text" id="withdraw-description" name="description" placeholder="e.g., ATM withdrawal">
+                            </div>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-arrow-up"></i> Process Withdrawal
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Transfer Form -->
+                    <div class="form-card">
+                        <h3><i class="fas fa-exchange-alt"></i> Transfer</h3>
+                        <form id="transfer-form">
+                            <div class="form-group">
+                                <label for="transfer-from">From Account</label>
+                                <select id="transfer-from" name="fromAccount" required>
+                                    <option value="">Select Source Account</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transfer-to">To Account</label>
+                                <select id="transfer-to" name="toAccount" required>
+                                    <option value="">Select Destination Account</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transfer-amount">Amount ($)</label>
+                                <input type="number" id="transfer-amount" name="amount" min="0.01" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="transfer-description">Description</label>
+                                <input type="text" id="transfer-description" name="description" placeholder="e.g., Payment for services">
+                            </div>
+                            <button type="submit" class="btn btn-info">
+                                <i class="fas fa-exchange-alt"></i> Process Transfer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Transaction History -->
+                <div class="transaction-history">
+                    <h3>Recent Transactions</h3>
+                    <div class="history-container" id="transaction-history">
+                        <!-- Transaction history will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thread Monitor Section -->
+            <section id="threads" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-microchip"></i> Thread Monitor</h2>
+                    <p>Monitor active threads and system performance</p>
+                </div>
+
+                <!-- Thread Statistics -->
+                <div class="thread-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-threads">0</h3>
+                            <p>Total Threads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="running-threads">0</h3>
+                            <p>Running Threads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-pause"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="idle-threads">0</h3>
+                            <p>Idle Threads</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thread List -->
+                <div class="thread-list">
+                    <h3>Active Threads</h3>
+                    <div class="thread-container" id="thread-container">
+                        <!-- Thread information will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Section -->
+            <section id="performance" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line"></i> Performance Metrics</h2>
+                    <p>System performance and transaction statistics</p>
+                </div>
+
+                <!-- Performance Charts -->
+                <div class="performance-charts">
+                    <div class="chart-card">
+                        <h3>Transaction Success Rate</h3>
+                        <div class="chart-container">
+                            <canvas id="success-rate-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Transaction Volume</h3>
+                        <div class="chart-container">
+                            <canvas id="volume-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="performance-metrics">
+                    <div class="metric-card">
+                        <h3>System Performance</h3>
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Success Rate:</span>
+                                <span class="metric-value" id="success-rate">0%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Avg Response Time:</span>
+                                <span class="metric-value" id="avg-response-time">0ms</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Throughput:</span>
+                                <span class="metric-value" id="throughput">0 txn/sec</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" id="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
+
